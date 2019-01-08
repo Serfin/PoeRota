@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PoeRota.Core.Repositories;
+using PoeRota.Infrastructure.Mappers;
+using PoeRota.Infrastructure.Repositories;
 
 namespace PoeRota.Api
 {
@@ -26,6 +29,11 @@ namespace PoeRota.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IUserRepository, InMemoryUserRepository>();
+
+            // Load AutoMapper config
+            services.AddSingleton(AutoMapperConfig.Initialize());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
