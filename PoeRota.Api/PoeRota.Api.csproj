@@ -7,6 +7,9 @@
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PoeRota.Infrastructure/PoeRota.Infrastructure.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
