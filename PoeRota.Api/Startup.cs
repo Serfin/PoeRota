@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using PoeRota.Core.Repositories;
 using PoeRota.Infrastructure.Mappers;
 using PoeRota.Infrastructure.Repositories;
+using PoeRota.Infrastructure.Services;
 
 namespace PoeRota.Api
 {
@@ -31,6 +32,8 @@ namespace PoeRota.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IUserRepository, InMemoryUserRepository>();
+
+            services.AddScoped<IUserService, UserService>();
 
             // Load AutoMapper config
             services.AddSingleton(AutoMapperConfig.Initialize());
