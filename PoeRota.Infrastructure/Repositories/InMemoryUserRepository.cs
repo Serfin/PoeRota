@@ -11,9 +11,9 @@ namespace PoeRota.Infrastructure.Repositories
     {
         private static readonly ISet<User> _users = new HashSet<User>
         {
-            new User(new Guid(), "user1@gmail.com", "user1", "secret", "salt", "ign1", "league1"),
-            new User(new Guid(), "user2@gmail.com", "user2", "secret", "salt", "ign2", "league2"),
-            new User(new Guid(), "user3@gmail.com", "user3", "secret", "salt", "ign3", "league3")  
+            new User(Guid.NewGuid(), "user1@gmail.com", "user1", "secret", "salt", "ign1", "league1"),
+            new User(Guid.NewGuid(), "user2@gmail.com", "user2", "secret", "salt", "ign2", "league2"),
+            new User(Guid.NewGuid(), "user3@gmail.com", "user3", "secret", "salt", "ign3", "league3")  
         };
 
         public async Task AddAsync(User user)

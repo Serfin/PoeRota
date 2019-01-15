@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -30,6 +31,20 @@ namespace PoeRota.Infrastructure.Services
             var user = await _userRepository.GetAsync(email);
 
             return _mapper.Map<User, UserDto>(user);
+        }
+
+        public async Task RegisterAsync(string username, string password, 
+            string email, string ign)
+        {
+            var user = await _userRepository.GetAsync(email);
+
+            if ( user != null)
+            {
+                throw new Exception($"User with email: {email} already exists.");
+            }
+
+            user = new User(Guid.NewGuid(), email, username, password, "salt", ign, "league");
+            await _userRepository.AddAsync(user);
         }
     }
 }
