@@ -32,8 +32,10 @@ namespace PoeRota.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IUserRepository, InMemoryUserRepository>();
+            services.AddScoped<IRotationRepository, RotationRepository>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRotationService, RotationService>();
 
             // Load AutoMapper config
             services.AddSingleton(AutoMapperConfig.Initialize());
