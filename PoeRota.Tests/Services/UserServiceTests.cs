@@ -18,7 +18,7 @@ namespace PoeRota.Tests.Services
             var mapperMock = new Mock<IMapper>();
             var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
 
-            await userService.RegisterAsync("user1","password","user1@gmail.com","ign1");
+            await userService.RegisterAsync("user1", "password", "user1@gmail.com", "ign1");
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
         }
     }
