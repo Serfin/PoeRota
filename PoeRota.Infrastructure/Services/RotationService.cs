@@ -26,9 +26,9 @@ namespace PoeRota.Infrastructure.Services
 
         public async Task<IEnumerable<RotationDto>> GetAsync(string type)
         {
-            var rotation = await _rotation.GetAsync(type);
+            var rotations = await _rotation.GetAsync(type);
 
-            return _mapper.Map<IEnumerable<Rotation>, IEnumerable<RotationDto>>(rotation);
+            return _mapper.Map<IEnumerable<Rotation>, IEnumerable<RotationDto>>(rotations);
         }
     }
 }

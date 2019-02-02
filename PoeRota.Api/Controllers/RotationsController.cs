@@ -11,11 +11,11 @@ namespace PoeRota.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RotationController : ControllerBase
+    public class RotationsController : ControllerBase
     {
         private readonly IRotationService _rotationService;
 
-        public RotationController(IRotationService rotationService)
+        public RotationsController(IRotationService rotationService)
         {
             _rotationService = rotationService;
         }

@@ -27,13 +27,16 @@ namespace PoeRota.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // Default IoC container
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            
+            // Repositories
             services.AddScoped<IUserRepository, InMemoryUserRepository>();
             services.AddScoped<IRotationRepository, RotationRepository>();
 
+            // Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRotationService, RotationService>();
 
