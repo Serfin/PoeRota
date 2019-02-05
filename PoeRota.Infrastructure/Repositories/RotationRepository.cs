@@ -17,9 +17,9 @@ namespace PoeRota.Infrastructure.Repositories
         };
         private static readonly ISet<Rotation> _rotations = new HashSet<Rotation>
         {
-            new Rotation(Guid.NewGuid(), _users[0], "Delve", "MasterRotation"),
-            new Rotation(Guid.NewGuid(), _users[1], "Betrayal", "MasterRotation"),
-            new Rotation(Guid.NewGuid(), _users[2], "Delve", "MapRotation"),
+            new Rotation(Guid.NewGuid(), _users[0], "Delve", "masterrotation"),
+            new Rotation(Guid.NewGuid(), _users[1], "Betrayal", "masterrotation"),
+            new Rotation(Guid.NewGuid(), _users[2], "Delve", "maprotation"),
         };
         public async Task AddAsync(Rotation rotation)
         {

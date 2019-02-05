@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PoeRota.Core.Repositories;
+using PoeRota.Infrastructure.CommandHandlers;
+using PoeRota.Infrastructure.CommandHandlers.User;
+using PoeRota.Infrastructure.Commands.Users;
 using PoeRota.Infrastructure.Mappers;
 using PoeRota.Infrastructure.Repositories;
 using PoeRota.Infrastructure.Services;
@@ -39,6 +42,7 @@ namespace PoeRota.Api
             // Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRotationService, RotationService>();
+            services.AddScoped<ICommandHandler<CreateUser>, CreateUserHandler>();
 
             // Load AutoMapper config
             services.AddSingleton(AutoMapperConfig.Initialize());
