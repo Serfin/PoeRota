@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../PoeRota.Infrastructure/PoeRota.Infrastructure.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="2.1.0" />
   </ItemGroup>
-
 </Project>

@@ -1,3 +1,5 @@
+using System;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PoeRota.Api.Controllers
@@ -8,7 +10,7 @@ namespace PoeRota.Api.Controllers
     {
         public string Message()
         {
-            return "PoeRota v.0.0.1";
+            return "Available paths : \n / \n /users \n /users/(email) \n /rotations \n /rotations/(type)";
         }
     }
 }
