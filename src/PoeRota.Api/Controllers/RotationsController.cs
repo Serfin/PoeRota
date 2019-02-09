@@ -20,12 +20,12 @@ namespace PoeRota.Api.Controllers
             _rotationService = rotationService;
         }
 
-        //GET rotations
+        //GET /rotations
         [HttpGet]
         public async Task<IEnumerable<RotationDto>> GetAll()
             => await _rotationService.GetAllAsync();
 
-        // GET rotations/type
+        // GET /rotations/type
         [HttpGet("{type}")]
         public async Task<IEnumerable<RotationDto>> Get(string type)
             => await _rotationService.GetAsync(type);

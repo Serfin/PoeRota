@@ -24,18 +24,35 @@ namespace PoeRota.Api.Controllers
             _commandDispatcher = commandDispatcher;
         }
 
-        //GET users
+        //GET /users
         [HttpGet]
-        public async Task<IEnumerable<UserDto>> GetAll()
-            => await _userService.GetAllAsync();
+        public async Task<IActionResult> GetAll()
+        {
+            var users = await _userService.GetAllAsync();
 
-        // GET users/email
+            return Ok(users);
+        }
+
+        // GET /users/email
         [HttpGet("{email}")]
-        public async Task<UserDto> Get(string email)
-            => await _userService.GetAsync(email);
-        // POST CreateUser
+        public async Task<IActionResult> Get(string email)
+        {
+            var user = await _userService.GetAsync(email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
+        // POST /users/CreateUser
         [HttpPost]
-        public async Task Register([FromBody] CreateUser command)
-            => await _commandDispatcher.DispatchAsync(command);
+        public async Task<IActionResult> Register([FromBody] CreateUser command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+
+            return Created($"users/{command.Email}", null);        
+        }
     }
 }
