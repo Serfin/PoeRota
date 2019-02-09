@@ -1,2 +1,2 @@
 @echo off
-dotnet run -p ../PoeRota.Api/PoeRota.Api.csproj
+dotnet run -p ../src/PoeRota.Api/PoeRota.Api.csproj

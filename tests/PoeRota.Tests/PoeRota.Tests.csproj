@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../PoeRota.Core/PoeRota.Core.csproj" />
-    <ProjectReference Include="../PoeRota.Infrastructure/PoeRota.Infrastructure.csproj" />
+    <ProjectReference Include="../../src/PoeRota.Core/PoeRota.Core.csproj" />
+    <ProjectReference Include="../../src/PoeRota.Infrastructure/PoeRota.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

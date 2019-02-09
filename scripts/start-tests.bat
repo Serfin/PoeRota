@@ -1,3 +1,3 @@
 @echo off
-cd ../PoeRota.Tests
+cd ../tests/PoeRota.Tests
 dotnet test
