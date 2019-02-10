@@ -13,7 +13,7 @@ namespace PoeRota.Tests.Services
     public class UserServiceTests
     {
         [Test]
-        public async Task register_async_should_invoke_add_assync_on_repository()
+        public async Task calling_register_async_should_invoke_user_repository_add_assync()
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
@@ -24,18 +24,30 @@ namespace PoeRota.Tests.Services
         }
 
         [Test]
-        public async Task when_calling_get_async_and_user_exists_it_should_invoke_user_repository_get_async()
+        public async Task calling_get_async_and_user_exists_should_invoke_user_repository_get_async()
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
 
             var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
-            await userService.GetAsync("user1@email.com"); // Invoke userService -> userRepo
+            await userService.GetAsync("user1@email.com"); 
             
             var user = new User(Guid.NewGuid(), "user1@email.com", "secret", "user", "salt", "ign", "league");
 
-            userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(user); // Check if return type == User
+            userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(user); 
+            userRepositoryMock.Verify(x => x.GetAsync(It.IsAny<string>()), Times.Once());
+        }
 
+        [Test]
+        public async Task calling_get_async_and_user_does_not_exists_should_ivoke_user_repository_get_async()
+        {
+            var userRepositoryMock = new Mock<IUserRepository>();
+            var mapperMock = new Mock<IMapper>();
+
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
+            await userService.GetAsync("user1@gmail.com");
+
+            userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(() => null);
             userRepositoryMock.Verify(x => x.GetAsync(It.IsAny<string>()), Times.Once());
         }
     }
