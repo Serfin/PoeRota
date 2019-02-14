@@ -9,6 +9,7 @@ namespace PoeRota.Infrastructure.Services
     {
         Task<UserDto> GetAsync(string email);
         Task<IEnumerable<UserDto>> GetAllAsync();
-        Task RegisterAsync(string username, string password, string email, string ign);
+        Task RegisterAsync(Guid userId, string username, string password, string email, string ign, string role);
+        Task LoginAsync(string email, string password);
     }
 }

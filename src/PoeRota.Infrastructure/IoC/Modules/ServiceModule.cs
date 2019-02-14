@@ -17,6 +17,10 @@ namespace PoeRota.Infrastructure.IoC.Modules
                    .Where(x => x.IsAssignableTo<IService>())
                    .AsImplementedInterfaces()
                    .InstancePerLifetimeScope();
+            
+            builder.RegisterType<Encrypter>()
+                   .As<IEncrypter>()
+                   .InstancePerLifetimeScope();
         }
     }
 }

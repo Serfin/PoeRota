@@ -11,9 +11,9 @@ namespace PoeRota.Infrastructure.Repositories
     {
          private static readonly User[] _users = new User[3]
         {
-            new User(Guid.NewGuid(), "user1@gmail.com", "user1", "secret", "salt", "ign1", "league1"),
-            new User(Guid.NewGuid(), "user2@gmail.com", "user2", "secret", "salt", "ign2", "league2"),
-            new User(Guid.NewGuid(), "user3@gmail.com", "user3", "secret", "salt", "ign3", "league3")  
+            new User(Guid.NewGuid(), "user1@gmail.com", "user1", "secret", "salt", "ign1", "user"),
+            new User(Guid.NewGuid(), "user2@gmail.com", "user2", "secret", "salt", "ign2", "user"),
+            new User(Guid.NewGuid(), "user3@gmail.com", "user3", "secret", "salt", "ign3", "user")  
         };
         private static readonly ISet<Rotation> _rotations = new HashSet<Rotation>
         {

@@ -12,11 +12,13 @@ namespace PoeRota.Infrastructure.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IEncrypter _encrypter;
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper, IEncrypter encrypter)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _encrypter = encrypter;
         }
 
         public async Task<IEnumerable<UserDto>> GetAllAsync()
@@ -33,8 +35,8 @@ namespace PoeRota.Infrastructure.Services
             return _mapper.Map<User, UserDto>(user);
         }
 
-        public async Task RegisterAsync(string username, string password, 
-            string email, string ign)
+        public async Task RegisterAsync(Guid userId, string username, string password, 
+            string email, string ign, string role)
         {
             var user = await _userRepository.GetAsync(email);
 
@@ -43,8 +45,31 @@ namespace PoeRota.Infrastructure.Services
                 throw new Exception($"User with email: {email} already exists.");
             }
 
-            user = new User(Guid.NewGuid(), email, username, password, "salt", ign, "league");
+            var salt = _encrypter.GetSalt(password);
+            var hash = _encrypter.GetHash(password, salt);
+
+            user = new User(userId, email, username, hash, salt, ign, role);
             await _userRepository.AddAsync(user);
+        }
+
+        public async Task LoginAsync(string email, string password)
+        {
+            var user = await _userRepository.GetAsync(email);
+
+            if (user == null)
+            {
+                throw new Exception("Invalid credentials");
+            }
+
+            var salt = _encrypter.GetSalt(password);
+            var hash = _encrypter.GetHash(password, salt);
+
+            if (user.Hash == hash)
+            {
+                return;
+            }
+            
+            throw new Exception("Invalid email or password");
         }
     }
 }

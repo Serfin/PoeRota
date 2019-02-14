@@ -17,9 +17,11 @@ namespace PoeRota.Tests.Services
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
-            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
+            var encrypterMock = new Mock<IEncrypter>();
 
-            await userService.RegisterAsync("user1", "password", "user1@gmail.com", "ign1");
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
+
+            await userService.RegisterAsync(Guid.NewGuid(), "user1", "password", "user1@gmail.com", "ign1", "user");
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
         }
 
@@ -28,11 +30,12 @@ namespace PoeRota.Tests.Services
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
+            var encrypterMock = new Mock<IEncrypter>();
 
-            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
             await userService.GetAsync("user1@email.com"); 
             
-            var user = new User(Guid.NewGuid(), "user1@email.com", "secret", "user", "salt", "ign", "league");
+            var user = new User(Guid.NewGuid(), "user1@email.com", "secret", "user", "salt", "ign", "user");
 
             userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(user); 
             userRepositoryMock.Verify(x => x.GetAsync(It.IsAny<string>()), Times.Once());
@@ -43,8 +46,9 @@ namespace PoeRota.Tests.Services
         {
             var userRepositoryMock = new Mock<IUserRepository>();
             var mapperMock = new Mock<IMapper>();
+            var encrypterMock = new Mock<IEncrypter>();
 
-            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object);
+            var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
             await userService.GetAsync("user1@gmail.com");
 
             userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(() => null);

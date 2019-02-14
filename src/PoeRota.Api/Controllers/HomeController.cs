@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PoeRota.Infrastructure.Services;
 
 namespace PoeRota.Api.Controllers
 {

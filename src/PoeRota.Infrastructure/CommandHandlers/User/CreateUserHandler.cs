@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using PoeRota.Infrastructure.Commands.Users;
 using PoeRota.Infrastructure.Services;
@@ -14,8 +15,8 @@ namespace PoeRota.Infrastructure.CommandHandlers.User
         }
         public async Task HandleAsync(CreateUser command)
         {
-            await _userService.RegisterAsync(command.Username, command.Password,
-                command.Email, command.Ign);
+            await _userService.RegisterAsync(Guid.NewGuid(), command.Username, command.Password,
+                command.Email, command.Ign, command.Role);
         }
     }
 }
