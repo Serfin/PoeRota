@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PoeRota.Infrastructure.Services;
+using PoeRota.Infrastructure.Settings;
 
 namespace PoeRota.Api.Controllers
 {
@@ -15,6 +16,7 @@ namespace PoeRota.Api.Controllers
         {
             string message = "Available paths : \n / \n /users \n /users/(email) \n /rotations \n /rotations/(type)";
             await Task.CompletedTask;
+
             return Ok(message);
         }
     }
