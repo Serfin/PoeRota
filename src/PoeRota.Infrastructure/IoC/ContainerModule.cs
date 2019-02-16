@@ -19,6 +19,8 @@ namespace PoeRota.Infrastructure.IoC
             builder.RegisterModule<CommandModule>();
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<ServiceModule>();
+            
+            builder.RegisterModule(new SettingsModule(_configuration));
 
             builder.RegisterInstance(AutoMapperConfig.Initialize())
                    .SingleInstance();

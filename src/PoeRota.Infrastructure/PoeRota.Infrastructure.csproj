@@ -3,11 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../PoeRota.Core/PoeRota.Core.csproj"/>
+    <ProjectReference Include="../PoeRota.Core/PoeRota.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.0.0"/>
-    <PackageReference Include="Autofac" Version="4.8.1"/>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0"/>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.0" />
   </ItemGroup>
 </Project>
