@@ -19,9 +19,12 @@ namespace PoeRota.Tests.Services
             var mapperMock = new Mock<IMapper>();
             var encrypterMock = new Mock<IEncrypter>();
 
+            encrypterMock.Setup(x => x.GetSalt(It.IsAny<string>())).Returns("hash123");
+            encrypterMock.Setup(x => x.GetHash(It.IsAny<string>(),It.IsAny<string>())).Returns("salt123"); 
+
             var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
 
-            await userService.RegisterAsync(Guid.NewGuid(), "user1", "password", "user1@gmail.com", "ign1", "user");
+            await userService.RegisterAsync(Guid.NewGuid(), "user1", "password123qwe", "user1@gmail.com", "ign1", "user");
             userRepositoryMock.Verify(x => x.AddAsync(It.IsAny<User>()), Times.Once);
         }
 
@@ -32,10 +35,13 @@ namespace PoeRota.Tests.Services
             var mapperMock = new Mock<IMapper>();
             var encrypterMock = new Mock<IEncrypter>();
 
+            encrypterMock.Setup(x => x.GetSalt(It.IsAny<string>())).Returns("hash123");
+            encrypterMock.Setup(x => x.GetHash(It.IsAny<string>(),It.IsAny<string>())).Returns("salt123");
+
             var userService = new UserService(userRepositoryMock.Object, mapperMock.Object, encrypterMock.Object);
             await userService.GetAsync("user1@email.com"); 
             
-            var user = new User(Guid.NewGuid(), "user1@email.com", "secret", "user", "salt", "ign", "user");
+            var user = new User(Guid.NewGuid(), "user1@email.com", "user", "password", "salt", "ign", "user");
 
             userRepositoryMock.Setup(x => x.GetAsync(It.IsAny<string>())).ReturnsAsync(user); 
             userRepositoryMock.Verify(x => x.GetAsync(It.IsAny<string>()), Times.Once());

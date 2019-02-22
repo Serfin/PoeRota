@@ -47,7 +47,7 @@ namespace PoeRota.Infrastructure.Services
 
             var salt = _encrypter.GetSalt(password);
             var hash = _encrypter.GetHash(password, salt);
-
+            
             user = new User(userId, email, username, hash, salt, ign, role);
             await _userRepository.AddAsync(user);
         }
@@ -63,7 +63,7 @@ namespace PoeRota.Infrastructure.Services
 
             var hash = _encrypter.GetHash(password, user.Salt);
 
-            if (user.Hash == hash)
+            if (user.Password == hash)
             {
                 return;
             }
