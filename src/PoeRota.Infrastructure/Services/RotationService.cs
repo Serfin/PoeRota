@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -17,6 +18,7 @@ namespace PoeRota.Infrastructure.Services
             _rotation = rotation;
             _mapper = mapper;
         }
+
         public async Task<IEnumerable<RotationDto>> GetAllAsync()
         {
             var rotations = await _rotation.GetAllAsync();
@@ -29,6 +31,12 @@ namespace PoeRota.Infrastructure.Services
             var rotations = await _rotation.GetAsync(type);
 
             return _mapper.Map<IEnumerable<Rotation>, IEnumerable<RotationDto>>(rotations);
+        }
+
+        public async Task AddAsync(Guid rotationId, Guid user, string league, string type, int spots)
+        {
+            var rotation = new Rotation(rotationId, user, league, type, spots);
+            await _rotation.AddAsync(rotation);    
         }
     }
 }
