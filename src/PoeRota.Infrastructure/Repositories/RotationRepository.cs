@@ -9,7 +9,7 @@ namespace PoeRota.Infrastructure.Repositories
 {
     public class RotationRepository : IRotationRepository
     {
-         private static readonly User[] _users = new User[3]
+        private static readonly User[] _users = new User[]
         {
             new User(Guid.NewGuid(), "user1@gmail.com", "user1", "secret", "salt", "ign1", "user"),
             new User(Guid.NewGuid(), "user2@gmail.com", "user2", "secret", "salt", "ign2", "user"),

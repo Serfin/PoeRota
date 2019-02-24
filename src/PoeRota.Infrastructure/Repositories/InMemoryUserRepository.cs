@@ -9,7 +9,12 @@ namespace PoeRota.Infrastructure.Repositories
 {
     public class InMemoryUserRepository : IUserRepository
     {
-        private static readonly ISet<User> _users = new HashSet<User>();
+        private static readonly ISet<User> _users = new HashSet<User>()
+        {
+            new User(Guid.NewGuid(), "user1@gmail.com", "user1", "secret", "salt", "ign1", "user"),
+            new User(Guid.NewGuid(), "user2@gmail.com", "user2", "secret", "salt", "ign2", "user"),
+            new User(Guid.NewGuid(), "user3@gmail.com", "user3", "secret", "salt", "ign3", "user")  
+        };
 
         public async Task AddAsync(User user)
         {
