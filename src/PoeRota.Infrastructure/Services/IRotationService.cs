@@ -11,5 +11,7 @@ namespace PoeRota.Infrastructure.Services
         Task<IEnumerable<RotationDto>> GetAllAsync();
         Task<IEnumerable<RotationDto>> GetAsync(string type);
         Task AddAsync(Guid rotationId, Guid user, string league, string type, int spots);
+        Task AddMemeberAsync(Guid userId, Guid rotationId);
+        Task DeleteMemberAsync(Guid userId, Guid rotationId);
     }
 }

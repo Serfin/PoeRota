@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace PoeRota.Infrastructure.DTO
 {
@@ -9,6 +10,7 @@ namespace PoeRota.Infrastructure.DTO
         public string League { get; set; }
         public string Type { get; set; }
         public int? Spots { get; set; }
+        public IEnumerable<UserDto> Members { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -36,12 +36,21 @@ namespace PoeRota.Api.Controllers
             => await _rotationService.GetAsync(type);
 
         // POST /rotations/CreateRotation
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateRotation([FromBody] CreateRotation command)
         {
             await _commandDispatcher.DispatchAsync(command);
 
             return Ok($"Created rotation with UserId : {command.UserId}");
+        }
+
+        //Post /rotations/JoinRotation
+        [HttpPost("join")]
+        public async Task<IActionResult> AddMemberToRotation([FromBody] JoinRotation command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+
+            return Ok($"Added user : {command.UserId} to rotation : {command.RotationId}");
         }
     }
 }

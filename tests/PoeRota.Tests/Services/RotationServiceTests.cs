@@ -15,7 +15,9 @@ namespace PoeRota.Tests.Services
         {
             var repositoryMock = new Mock<IRotationRepository>();
             var mapperMock = new Mock<IMapper>();
-            var rotationService = new RotationService(repositoryMock.Object, mapperMock.Object);
+            var userRepositoryMock = new Mock<IUserRepository>();
+            var rotationService = new RotationService(repositoryMock.Object, userRepositoryMock.Object,
+                 mapperMock.Object);
 
             await rotationService.GetAllAsync();
 

@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace PoeRota.Core.Domain
 {
     public class Rotation
     {
+        private ISet<User> _members = new HashSet<User>();
         public Rotation(Guid rotationId, Guid creator, string league, string type, int? spots)
         {
             RotationId = rotationId;
@@ -19,6 +21,11 @@ namespace PoeRota.Core.Domain
         public string League { get; protected set; }
         public string Type { get; protected set; }
         public int? Spots { get; protected set; }
+        public IEnumerable<User> Members 
+        { 
+            get { return _members; }
+            protected set { _members = new HashSet<User>(); }
+        }
         public DateTime CreatedAt { get; protected set; }
 
         private void SetCreator(Guid creator)
@@ -67,6 +74,31 @@ namespace PoeRota.Core.Domain
             }
 
             Spots = spots;
+        }
+
+        public void AddMember(User member)
+        {
+            if (member == null)
+            {
+                throw new Exception("Cannot add empty user");
+            }
+            if (Spots == 0 )
+            {
+                throw new Exception("No spots left");
+            }
+            _members.Add(member);
+            Spots = Spots - 1;
+        }
+
+        public void DeleteMember(User member)
+        {
+            if (member == null)
+            {
+                throw new Exception("Cannot delete empty user");
+            }
+
+            _members.Remove(member);
+            Spots = Spots + 1;
         }
     }
 }
