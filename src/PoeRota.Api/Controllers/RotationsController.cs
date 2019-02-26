@@ -52,5 +52,13 @@ namespace PoeRota.Api.Controllers
 
             return Ok($"Added user : {command.UserId} to rotation : {command.RotationId}");
         }
+
+        [HttpPost("leave")]
+        public async Task<IActionResult> RemoveUserFromRotation([FromBody] LeaveRotation command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+
+            return Ok($"Removed user : {command.UserId} from rotation : {command.RotationId}");
+        }
     }
 }

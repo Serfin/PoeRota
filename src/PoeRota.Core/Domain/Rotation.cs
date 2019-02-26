@@ -86,6 +86,15 @@ namespace PoeRota.Core.Domain
             {
                 throw new Exception("No spots left");
             }
+            if (_members.Contains(member))
+            {
+                throw new Exception("User with this ID is already in this rotation");
+            }
+            if (member.UserId == Creator)
+            {
+                throw new Exception("User cannot join his own rotation");
+            }
+
             _members.Add(member);
             Spots = Spots - 1;
         }
@@ -96,7 +105,15 @@ namespace PoeRota.Core.Domain
             {
                 throw new Exception("Cannot delete empty user");
             }
-
+            if (!_members.Contains(member))
+            {
+                throw new Exception("User does not exist in this rotation");
+            }
+            if (member.UserId == Creator)
+            {
+                throw new Exception("User cannot be from his own rotation");
+            }
+            
             _members.Remove(member);
             Spots = Spots + 1;
         }
